@@ -34,7 +34,7 @@ defmodule Peselx.Mixfile do
      maintainers: ["Bartek 'Koziołek' Kuczyński"],
      licenses: ["Apache 2.0"],
      links: %{"GitHub" => "https://github.com/Koziolek/peselx",
-              "Docs" => "http://koziolek.github.io/postgrex/"}]
+              "Docs" => "http://koziolek.github.io/peselx/"}]
   end
 
 end
