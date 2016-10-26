@@ -1,5 +1,7 @@
 defmodule Peselx do
-
+    @moduledoc """
+    Provides function validate/1 to check PESEL number.
+    """
 
     import Enum
     import String, only: [split: 3, to_integer: 1]
@@ -26,10 +28,18 @@ defmodule Peselx do
       d = split(pesel, "", trim: true) |> map(&(to_integer &1))
       s = zip([d, @weigths]) |> map(&r_t_m/1)|> sum
 
-      verify_cd(10 - rem(s, 10), last(d))
+      verify_cd(cal_cd(s), last(d))
     end
 
-    defp verify_cd(md, cd) when md == cd do
+
+    defp cal_cd(s)do
+      10 - rem(s, 10)
+    end
+    
+    #
+    # if sum mod 10 gives 0 then md will be 10 and we need to normalize it to 0.
+    #
+    defp verify_cd(md, cd) when (md == 10 and cd == 0) or ( md == cd) do
       {:ok, "Valid"}
     end
 
