@@ -6,9 +6,9 @@ Elixir parser and validator for PESEL numbers
 
 [PESEL](https://pl.wikipedia.org/wiki/PESEL) is Polish national ID number. It has specific structure:
 
- |Birth date |Serial |Sex  |Control digit |
- |-----------|-------|-----|--------------|
- |440514     |014    |5    |8             |
+|Birth date |Serial |Sex  |Control digit |
+|-----------|-------|-----|--------------| 
+|440514     |014    |5    |8             |
 
 ### Birth date
 

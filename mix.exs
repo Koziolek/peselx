@@ -19,7 +19,8 @@ defmodule Peselx.Mixfile do
   defp deps do
     [ {:earmark, "~> 0.1", only: :dev},
       {:ex_doc, "~> 0.11", only: :dev},
-      {:credo, "~> 0.4", only: [:dev, :test]}
+      {:credo, "~> 0.4", only: [:dev, :test]},
+      {:dialyxir, "~> 0.3.5", only: [:dev]}
     ]
   end
 
