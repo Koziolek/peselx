@@ -9,7 +9,12 @@ defmodule Peselx.Mixfile do
      start_permanent: Mix.env == :prod,
      description: description(),
      package: package(),
-     deps: deps()]
+     deps: deps(),
+     source_url: "https://github.com/Koziolek/peselx",
+     docs: [
+       output: "docs"
+     ]
+   ]
   end
 
   def application do
