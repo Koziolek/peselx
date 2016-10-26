@@ -3,7 +3,8 @@ defmodule Peselx do
     Provides function validate/1 to check PESEL number.
     """
 
-    import Enum
+    import Enum, except: [to_list: 1]
+    import Tuple, only: [to_list: 1]
     import String, only: [split: 3, to_integer: 1]
     import List, except: [to_integer: 1]
 
@@ -25,12 +26,11 @@ defmodule Peselx do
     """
     @spec validate(String.t) :: {atom, String.t}
     def validate(pesel) when is_binary(pesel) do
-      d = split(pesel, "", trim: true) |> map(&(to_integer &1))
-      s = zip([d, @weigths]) |> map(&r_t_m/1) |> sum
+      pesel_digits = pesel |> split("", trim: true) |> map(&(to_integer &1))
+      sum_of_digits = [pesel_digits, @weigths] |> zip |> map(&r_t_m/1) |> sum
 
-      verify_cd(cal_cd(s), last(d))
+      verify_cd(cal_cd(sum_of_digits), last(pesel_digits))
     end
-
 
     defp cal_cd(s)do
       10 - rem(s, 10)
@@ -48,7 +48,7 @@ defmodule Peselx do
     end
 
     defp r_t(tuple, f) when is_tuple(tuple) do
-        Tuple.to_list(tuple) |> Enum.reduce(f)
+        tuple |> to_list |> reduce(f)
     end
 
     defp r_t_m(tuple) when is_tuple(tuple) do
