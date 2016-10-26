@@ -26,7 +26,7 @@ defmodule Peselx do
     @spec validate(String.t) :: {atom, String.t}
     def validate(pesel) when is_binary(pesel) do
       d = split(pesel, "", trim: true) |> map(&(to_integer &1))
-      s = zip([d, @weigths]) |> map(&r_t_m/1)|> sum
+      s = zip([d, @weigths]) |> map(&r_t_m/1) |> sum
 
       verify_cd(cal_cd(s), last(d))
     end
@@ -35,11 +35,11 @@ defmodule Peselx do
     defp cal_cd(s)do
       10 - rem(s, 10)
     end
-    
+
     #
     # if sum mod 10 gives 0 then md will be 10 and we need to normalize it to 0.
     #
-    defp verify_cd(md, cd) when (md == 10 and cd == 0) or ( md == cd) do
+    defp verify_cd(md, cd) when (md == 10 and cd == 0) or (md == cd) do
       {:ok, "Valid"}
     end
 
