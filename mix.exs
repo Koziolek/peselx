@@ -29,7 +29,7 @@ defmodule Peselx.Mixfile do
 
   defp package do
     [# These are the default files included in the package
-     name: :postgrex,
+     name: :peselx,
      files: ["lib", "mix.exs", "README*", "LICENSE*"],
      maintainers: ["Bartek 'Koziołek' Kuczyński"],
      licenses: ["Apache 2.0"],
