@@ -13,4 +13,8 @@ defmodule PeselxTest do
   test "Use random pesel with wrong CD 04231115628" do
     assert Peselx.validate("04231115628") == {:error, "Wrong checksum"}
   end
+
+  test "Should extract date from persel" do
+    assert Peselx.Date.to_date([0,4,2,3,1,1,1,5,6,2,8])  == []
+  end
 end
