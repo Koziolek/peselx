@@ -7,7 +7,7 @@ Elixir parser and validator for PESEL numbers
 [PESEL](https://pl.wikipedia.org/wiki/PESEL) is Polish national ID number. It has specific structure:
 
 |Birth date |Serial |Sex  |Control digit |
-|-----------|-------|-----|--------------| 
+|-----------|-------|-----|--------------|
 |440514     |014    |5    |8             |
 
 ### Birth date
@@ -47,3 +47,13 @@ Weights for calculating CD:
 iex> Peselx.validate("04231115629")
 {:ok, "Valid"}
 ```
+
+## Change in branching model
+
+To remember. Rules of branching:
+
+ - `master` – branch is production.
+ - `release-*` – code where we developing next release.
+ - `feature-*` – optional branch for feature that is developer „on side”
+
+Use `merge --no-ff` to close branch.
