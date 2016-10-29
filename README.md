@@ -57,3 +57,11 @@ To remember. Rules of branching:
  - `feature-*` – optional branch for feature that is developer „on side”
 
 Use `merge --no-ff` to close branch.
+
+## Varia
+
+MASTER – [![Build Status – MASTER](https://travis-ci.org/Koziolek/peselx.svg?branch=master)](https://travis-ci.org/Koziolek/peselx)
+
+release-0.2.0 – [![Build Status – 0.2.0](https://travis-ci.org/Koziolek/peselx.svg?branch=release-0.2.0)](https://travis-ci.org/Koziolek/peselx)
+
+release-0.3.0 – [![Build Status – 0.3.0](https://travis-ci.org/Koziolek/peselx.svg?branch=release-0.3.0)](https://travis-ci.org/Koziolek/peselx)
