@@ -18,4 +18,8 @@ defmodule PeselxTest do
     assert Peselx.validate("04231115628") == {:error, "Wrong checksum"}
   end
 
+  test "Use random pesel with wrong length 4231115620" do
+    assert Peselx.validate("4231115628") == {:error, "Wrong length"}
+  end
+
 end
