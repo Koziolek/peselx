@@ -6,7 +6,8 @@ defmodule Peselx do
       - Control digit
       - Length
 
-    Control digit check base on algorithm descibed in [this article](https://pl.wikipedia.org/wiki/PESEL).
+    Control digit check base on algorithm descibed in
+    [this article](https://pl.wikipedia.org/wiki/PESEL).
     """
 
     import Enum, except: [to_list: 1]
