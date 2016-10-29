@@ -1,6 +1,12 @@
 defmodule Peselx do
     @moduledoc """
     Provides function validate/1 to check PESEL number.
+
+    Checks:
+      - Control digit
+      - Length
+
+    Control digit check base on algorithm descibed in [this article](https://pl.wikipedia.org/wiki/PESEL).
     """
 
     import Enum, except: [to_list: 1]
@@ -15,7 +21,7 @@ defmodule Peselx do
        Validate PESEL number.
 
        ## Parameters
-        - pesel: String represents PESEL number
+        - pesel: String represents PESEL number.
 
        ## Examples
 
@@ -24,10 +30,18 @@ defmodule Peselx do
 
             iex> Peselx.validate("04231115628")
             {:error, "Wrong checksum"}
+
+            iex> Peselx.validate("4231115629")
+            {:error, "Wrong length"}
+
+            iex> Peselx.validate("004231115629")
+            {:error, "Wrong length"}
     """
     @spec validate(String.t) :: {atom, String.t}
     def validate(pesel) when is_binary(pesel) do
-      pesel_digits = pesel |> split("", trim: true) |> map(&(to_integer &1))
+      pesel_digits = pesel
+                      |> split("", trim: true)
+                      |> map(&(to_integer &1))
       [pesel_digits, @weigths]
         |> zip
         |> map(&r_t_m/1)
@@ -37,15 +51,16 @@ defmodule Peselx do
         |> verify_length(pesel)
     end
 
+
+    defp cal_cd(s)do
+      10 - rem(s, 10)
+    end
+
     defp verify_length(v, pesel) do
       case length(pesel) do
         11 -> v
         _ ->  {:error, "Wrong length"}
       end
-    end
-
-    defp cal_cd(s)do
-      10 - rem(s, 10)
     end
 
     #
