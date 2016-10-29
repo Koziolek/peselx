@@ -34,7 +34,7 @@ defmodule Peselx do
         |> sum
         |> cal_cd
         |> verify_cd(last(pesel_digits))
-        |>verify_length(pesel)
+        |> verify_length(pesel)
     end
 
     defp verify_length(v, pesel) do
