@@ -62,11 +62,24 @@
         Peselx
         
         
+          <a href="https://github.com/Koziolek/peselx/blob/master/lib/peselx.ex#L1" title="View Source" class="view-source" rel="help">
+            <i class="icon-code"></i>
+          </a>
+        
       </h1>
 
       
         <section id="moduledoc" class="docstring">
           <p>Provides function validate/1 to check PESEL number.</p>
+<p>Checks:</p>
+<ul>
+<li>Control digit
+</li>
+<li>Length
+</li>
+</ul>
+<p>Control digit check base on algorithm descibed in
+<a href="https://pl.wikipedia.org/wiki/PESEL">this article</a>.</p>
 
         </section>
       
@@ -123,6 +136,10 @@
     </a>
     <span class="signature">validate(pesel)</span>
     
+      <a href="https://github.com/Koziolek/peselx/blob/master/lib/peselx.ex#L42" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
     
   </div>
   
@@ -138,13 +155,19 @@
   <section class="docstring">
     <p>   Validate PESEL number.</p>
 <p>   ## Parameters</p>
-<pre><code class="elixir">- pesel: String represents PESEL number</code></pre>
+<pre><code class="elixir">- pesel: String represents PESEL number.</code></pre>
 <p>   ## Examples</p>
 <pre><code class="iex elixir">iex&gt; Peselx.validate(&quot;04231115629&quot;)
     {:ok, &quot;Valid&quot;}
 
     iex&gt; Peselx.validate(&quot;04231115628&quot;)
-    {:error, &quot;Wrong checksum&quot;}</code></pre>
+    {:error, &quot;Wrong checksum&quot;}
+
+    iex&gt; Peselx.validate(&quot;4231115629&quot;)
+    {:error, &quot;Wrong length&quot;}
+
+    iex&gt; Peselx.validate(&quot;004231115629&quot;)
+    {:error, &quot;Wrong length&quot;}</code></pre>
 
   </section>
 </div>
