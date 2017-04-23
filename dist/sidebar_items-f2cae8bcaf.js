@@ -1,0 +1,1 @@
+sidebarNodes={"extras":[{"id":"api-reference","title":"API Reference","group":"","headers":[{"id":"Modules","anchor":"modules"}]}],"exceptions":[],"modules":[{"id":"Peselx","title":"Peselx","functions":[{"id":"validate/1","anchor":"validate/1"}]}],"protocols":[]}
