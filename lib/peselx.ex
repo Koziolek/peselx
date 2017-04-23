@@ -10,7 +10,7 @@ defmodule Peselx do
     [this article](https://pl.wikipedia.org/wiki/PESEL).
     """
 
-    import Enum, except: [to_list: 1]
+    import Enum, except: [to_list: 1, zip: 1]
     import Tuple, only: [to_list: 1]
     import String, only: [split: 3, to_integer: 1, length: 1]
     import List, except: [to_integer: 1]

@@ -3,7 +3,7 @@ defmodule Peselx.Mixfile do
 
   def project do
     [app: :peselx,
-     version: "0.2.0",
+     version: "0.2.1",
      elixir: "~> 1.3",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
@@ -22,10 +22,10 @@ defmodule Peselx.Mixfile do
   end
 
   defp deps do
-    [ {:earmark, "~> 0.1", only: :dev},
-      {:ex_doc, "~> 0.11", only: :dev},
-      {:credo, "~> 0.5.1", only: [:dev, :test]},
-      {:dialyxir, "~> 0.3.5", only: [:dev]}
+    [ {:earmark, "~> 1.2.0", only: :dev},
+      {:ex_doc, "~> 0.15.1", only: :dev},
+      {:credo, "~> 0.7.3", only: [:dev, :test]},
+      {:dialyxir, "~> 0.5.0", only: [:dev]}
     ]
   end
 
