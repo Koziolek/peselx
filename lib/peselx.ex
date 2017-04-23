@@ -74,10 +74,12 @@ defmodule Peselx do
       {:error, "Wrong checksum"}
     end
 
+    # Reduce tuple using function f
     defp r_t(tuple, f) when is_tuple(tuple) do
         tuple |> to_list |> reduce(f)
     end
 
+    # Reduce tuple by multiplying elements
     defp r_t_m(tuple) when is_tuple(tuple) do
        r_t(tuple, &Kernel.*/2)
     end
