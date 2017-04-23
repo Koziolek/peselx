@@ -16,7 +16,7 @@ defmodule Peselx do
     import List, except: [to_integer: 1]
     import Kernel, except: [length: 1]
 
-    @weigths [1,3,7,9,1,3,7,9,1,3]
+    @weigths [1, 3, 7, 9, 1, 3, 7, 9, 1, 3]
 
     @doc """
        Validate PESEL number.
@@ -51,7 +51,6 @@ defmodule Peselx do
         |> verify_cd(last(pesel_digits))
         |> verify_length(pesel)
     end
-
 
     defp cal_cd(s)do
       10 - rem(s, 10)
