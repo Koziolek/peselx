@@ -59,11 +59,12 @@ defmodule Peselx do
       10 - rem(s, 10)
     end
 
-
 #
-#     In PESEL algorythm is small bug. If we change order of year and day in date, from `ddmmyy` to `yymmdd` then checksum will be the same. Year and day has same weigths.
+#     In PESEL algorythm is small bug. If we change order of year and day in date,
+#     from `ddmmyy` to `yymmdd` then checksum will be the same. Year and day has same weigths.
 #
-#     We could try to recognize that situation in some cases. If first two digits are greater than maximum number of days in month then PESEL is invalid.
+#     We could try to recognize that situation in some cases. If first two digits are greater
+#     than maximum number of days in month then PESEL is invalid.
 #
     defp are_we_czech(current, pesel_digits) when elem(current, 0) == :error do
       current
