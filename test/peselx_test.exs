@@ -26,8 +26,24 @@ defmodule PeselxTest do
     assert Peselx.validate("004231115628") == {:error, "Wrong length"}
   end
 
-  test "Should extract date from persel" do
-    assert Peselx.DateUtils.to_date([0, 4, 2, 3, 1, 1, 1, 5, 6, 2, 8])  == ~D[2011-03-04]
+  test "Should extract date from PESEL for XIX century" do
+    assert Peselx.DateUtils.to_date([0, 4, 8, 3, 1, 1, 1, 5, 6, 2, 8])  == {:ok, ~D[1804-03-11]}
+  end
+
+  test "Should extract date from PESEL for XX century" do
+      assert Peselx.DateUtils.to_date([0, 4, 0, 3, 1, 1, 1, 5, 6, 2, 8])  == {:ok, ~D[1904-03-11]}
+  end
+
+  test "Should extract date from PESEL for XXI century" do
+      assert Peselx.DateUtils.to_date([0, 4, 2, 3, 1, 1, 1, 5, 6, 2, 8])  == {:ok, ~D[2004-03-11]}
+  end
+
+  test "Should extract date from PESEL for XXII century" do
+      assert Peselx.DateUtils.to_date([0, 4, 4, 3, 1, 1, 1, 5, 6, 2, 8])  == {:ok, ~D[2104-03-11]}
+  end
+
+  test "Should extract date from PESEL for XXIII century" do
+      assert Peselx.DateUtils.to_date([0, 4, 6, 3, 1, 1, 1, 5, 6, 2, 8])  == {:ok, ~D[2204-03-11]}
   end
 
 end

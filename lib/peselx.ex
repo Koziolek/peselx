@@ -61,7 +61,7 @@ defmodule Peselx do
 
 #
 #     In PESEL algorythm is small bug. If we change order of year and day
-#     in date, from `ddmmyy` to `yymmdd` then checksum will be the same.
+#     in date, from `yymmdd` to `ddmmyy` then checksum will be the same.
 #     Year and day has same weigths.
 #
 #     We could try to recognize that situation in some cases. If first two
@@ -117,6 +117,7 @@ defmodule Peselx.DateUtils do
 
   import Enum, except: [to_list: 1]
 
+  @spec to_date(list(integer())) :: {atom, any}
   def to_date(pesel) do
         date_elems = pesel
                         |> chunk(2)
@@ -127,25 +128,28 @@ defmodule Peselx.DateUtils do
         day = to_string_format(calculate_day(date_elems))
 
         case Date.from_iso8601("#{year}-#{month}-#{day}") do
-            {:ok, result} -> result
+            {:ok, result} -> {:ok, result}
             {:error, reason} -> {:error, reason}
-            _ -> {:error, "Cannot do that"}
         end
   end
 
-  defp calculate_year({_, [f|_], [d|u]}) when f == 0 or f == 1, do: 1900 + 10 * d + to_integer(u)
-  defp calculate_year({_, [f|_], [d|u]}) when f == 2 or f == 3, do: 2000 + 10 * d + to_integer(u)
-  defp calculate_year({_, [f|_], [d|u]}) when f == 4 or f == 5, do: 2100 + 10 * d + to_integer(u)
-  defp calculate_year({_, [f|_], [d|u]}) when f == 6 or f == 7, do: 2200 + 10 * d + to_integer(u)
-  defp calculate_year({_, [f|_], [d|u]}) when f == 8 or f == 9, do: 1800 + 10 * d + to_integer(u)
+  defp calculate_year({[d|u], [f|_], _}) when f == 0 or f == 1, do: c_y(1900, d , u)
+  defp calculate_year({[d|u], [f|_], _}) when f == 2 or f == 3, do: c_y(2000, d , u)
+  defp calculate_year({[d|u], [f|_], _}) when f == 4 or f == 5, do: c_y(2100, d , u)
+  defp calculate_year({[d|u], [f|_], _}) when f == 6 or f == 7, do: c_y(2200, d , u)
+  defp calculate_year({[d|u], [f|_], _}) when f == 8 or f == 9, do: c_y(1800, d , u)
 
-  defp calculate_month({_, [f|l], _}) when f == 0 or f == 1, do: f * 10 - 0 +  to_integer(l)
-  defp calculate_month({_, [f|l], _}) when f == 2 or f == 3, do: f * 10 - 20 + to_integer(l)
-  defp calculate_month({_, [f|l], _}) when f == 4 or f == 5, do: f * 10 - 40 + to_integer(l)
-  defp calculate_month({_, [f|l], _}) when f == 6 or f == 7, do: f * 10 - 60 + to_integer(l)
-  defp calculate_month({_, [f|l], _}) when f == 8 or f == 9, do: f * 10 - 80 + to_integer(l)
+  defp c_y(cent, d, u), do: cent + 10 * d + to_integer u
 
-  defp calculate_day({[f|l], _, _}) do
+  defp calculate_month({_, [f|l], _}) when f == 0 or f == 1, do: c_m(f, 0, l)
+  defp calculate_month({_, [f|l], _}) when f == 2 or f == 3, do: c_m(f, 20, l)
+  defp calculate_month({_, [f|l], _}) when f == 4 or f == 5, do: c_m(f, 40, l)
+  defp calculate_month({_, [f|l], _}) when f == 6 or f == 7, do: c_m(f, 60, l)
+  defp calculate_month({_, [f|l], _}) when f == 8 or f == 9, do: c_m(f, 80, l)
+
+  defp c_m(f, c, l), do: f * 10 - c + to_integer l
+
+  defp calculate_day({_, _, [f|l]}) do
        last_d_d = to_integer(l)
        f * 10 + last_d_d
   end
