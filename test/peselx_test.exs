@@ -46,4 +46,12 @@ defmodule PeselxTest do
       assert Peselx.DateUtils.to_date([0, 4, 6, 3, 1, 1, 1, 5, 6, 2, 8])  == {:ok, ~D[2204-03-11]}
   end
 
+  test "Should not extract date from PESEL if not existed day of month - 31th april" do
+    assert Peselx.DateUtils.to_date([0, 4, 0, 4, 3, 1, 1, 5, 6, 2, 8])  == {:error, "Invalid date"}
+  end
+
+  test "Should not extract date from PESEL if not existed month - 14" do
+    assert Peselx.DateUtils.to_date([0, 4, 1, 4, 1, 1, 1, 5, 6, 2, 8])  == {:error, "Invalid date"}
+  end
+
 end

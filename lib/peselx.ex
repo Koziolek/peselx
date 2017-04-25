@@ -129,7 +129,7 @@ defmodule Peselx.DateUtils do
 
         case Date.from_iso8601("#{year}-#{month}-#{day}") do
             {:ok, result} -> {:ok, result}
-            {:error, reason} -> {:error, reason}
+            {:error, reason} -> {:error, "Invalid date"}
         end
   end
 
